@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'start_page.dart';
 
-void main() => runApp(new StartPage());
+void main() => runApp(new IndexPage());
 
-class MyApp extends StatelessWidget {
+class IndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
           title: Text('Flutter layout demo'),
         ),
         body: Center(
-          child: Text('Hello World'),
+          child: Text('this is main page!'),
         ),
       ),
     );
