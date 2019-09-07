@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:apifm/apifm.dart' as Apifm;
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
-import 'index.dart';
+import './auth/index.dart';
 
 void main() => runApp(new StartPage());
 
@@ -70,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
             return new Image.network(imagesList[index],fit: BoxFit.cover,);
           },
           itemCount: imagesList.length,
+          loop: false,
           pagination: new SwiperPagination(),
           onTap: (index) {
             print(index); // 可以根据是否是最后一张图片，来跳转至主界面，一般会在最后一张图片上面设置一个按钮元素，引导用户去点击
