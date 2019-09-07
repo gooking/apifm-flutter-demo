@@ -6,6 +6,7 @@ import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 
 import 'register.dart';
+import 'login.dart';
 
 void main() => runApp(new IndexPage());
 
@@ -107,7 +108,7 @@ class _Foot extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => RegisterPage()),
+                MaterialPageRoute(builder: (context) => LoginPage()),
               );
             },
             color: Colors.red,
