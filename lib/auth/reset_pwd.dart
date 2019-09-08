@@ -4,12 +4,12 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 import 'login.dart';
 
-void main() => runApp(RegisterPage());
+void main() => runApp(ForgetPwdPage());
 
 // 这个 widget 作用这个应用的顶层 widget.
 //这个 widget 是无状态的，所以我们继承的是 [StatelessWidget].
 //对应的，有状态的 widget 可以继承 [StatefulWidget]
-class RegisterPage extends StatelessWidget {
+class ForgetPwdPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 我们想使用 material 风格的应用，所以这里用 MaterialApp
@@ -18,17 +18,17 @@ class RegisterPage extends StatelessWidget {
       // recent 按钮打开最近应用列表的时候，显示的就是这个 title。
       title: 'Welcome to Flutter',
       // 应用的“主页”
-      home: _RegisterPageWidget(),
+      home: _ForgetPwdPageWidget(),
     );
   }
 }
 
-class _RegisterPageWidget extends StatefulWidget {
+class _ForgetPwdPageWidget extends StatefulWidget {
   @override
-  _RegisterPageWidgetState createState() => _RegisterPageWidgetState();
+  _ForgetPwdPageWidgetState createState() => _ForgetPwdPageWidgetState();
 }
 
-class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
+class _ForgetPwdPageWidgetState extends State<_ForgetPwdPageWidget> {
   //全局 Key 用来获取 Form 表单组件
   GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   String mobile;
@@ -82,7 +82,7 @@ class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
     }
   }
 
-  void regist() async {
+  void resetPassword() async {
     var loginForm = loginKey.currentState;
     //验证 Form表单
     if (!loginForm.validate()) {
@@ -102,15 +102,11 @@ class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
       Fluttertoast.showToast(msg: "请输入短信验证码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
-    if (password == null || password.trim().length < 4) {
+    if (password == null || password.trim().length < 1) {
       Fluttertoast.showToast(msg: "请输入登录密码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
-    var res = await Apifm.register_mobile({
-      'mobile': mobile,
-      'pwd': password,
-      'code': smsCode
-    });
+    var res = await Apifm.resetPwd(mobile, password, smsCode);
     if (res['code'] == 0) {
       Fluttertoast.showToast(msg: "注册成功,请登录", gravity: ToastGravity.CENTER, fontSize: 14);
       Navigator.push(
@@ -128,7 +124,7 @@ class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('注册新账号'),
+        title: Text('重置登录密码'),
         centerTitle: true,
       ),
       body: Column(
@@ -234,15 +230,12 @@ class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: RaisedButton(
-                    padding: EdgeInsets.all(15),
-                    child: Text(
-                      "立即注册",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    textColor: Colors.white,
-                    color: Theme.of(context).primaryColor,
-                    onPressed: regist,
+                  child: MaterialButton(
+                      padding: EdgeInsets.all(15),
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      child: new Text('重新设置登录密码'),
+                      onPressed: resetPassword,
                   ),
                 ),
               ],

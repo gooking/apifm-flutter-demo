@@ -5,6 +5,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io';
 import 'package:device_info/device_info.dart';
 
+import 'reset_pwd.dart';
+
 void main() => runApp(LoginPage());
 
 // 这个 widget 作用这个应用的顶层 widget.
@@ -43,7 +45,14 @@ class _LoginPageWidgetState extends State<_LoginPageWidget> {
     super.initState();
   }
 
-  void regist() async {
+  forgetPassword () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ForgetPwdPage()),
+    );
+  }
+
+  void login() async {
     var loginForm = loginKey.currentState;
     //验证 Form表单
     if (!loginForm.validate()) {
@@ -96,7 +105,6 @@ class _LoginPageWidgetState extends State<_LoginPageWidget> {
               //设置globalKey，用于后面获取FormState
               key: loginKey,
               //开启自动校验
-              autovalidate: true,
               child: Column(
                 children: <Widget>[
                   TextFormField(
@@ -131,25 +139,30 @@ class _LoginPageWidgetState extends State<_LoginPageWidget> {
                     onSaved: (value) {
                       password = value;
                     },
-                  )
+                  ),
+                  new Align(
+                    alignment: FractionalOffset.centerRight,
+                    child: new FlatButton(                      
+                      padding: EdgeInsets.all(0),
+                      child: new Text('忘记登录密码？'),
+                      onPressed: forgetPassword,
+                    )
+                  ),                  
                 ],
               ),
             ),
           ),
           Container(
-            padding: EdgeInsets.all(16),
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: RaisedButton(
-                    padding: EdgeInsets.all(15),
-                    child: Text(
-                      "立即登录",
-                      style: TextStyle(fontSize: 18),
-                    ),
-                    textColor: Colors.white,
-                    color: Theme.of(context).primaryColor,
-                    onPressed: regist,
+                  child: 
+                  new MaterialButton(
+                      padding: EdgeInsets.all(15),
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      child: new Text('立即登录'),
+                      onPressed: login,
                   ),
                 ),
               ],
