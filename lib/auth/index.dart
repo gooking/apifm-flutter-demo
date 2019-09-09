@@ -8,9 +8,9 @@ import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'register.dart';
 import 'login.dart';
 
-void main() => runApp(new IndexPage());
+void main() => runApp(new AuthIndexPage());
 
-class IndexPage extends StatelessWidget {
+class AuthIndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

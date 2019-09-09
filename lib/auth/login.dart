@@ -153,11 +153,12 @@ class _LoginPageWidgetState extends State<_LoginPageWidget> {
             ),
           ),
           Container(
+            padding: EdgeInsets.all(15),
             child: Row(
               children: <Widget>[
                 Expanded(
                   child: 
-                  new MaterialButton(
+                  new MaterialButton(                    
                       padding: EdgeInsets.all(15),
                       color: Colors.blue,
                       textColor: Colors.white,

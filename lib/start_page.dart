@@ -3,7 +3,8 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:apifm/apifm.dart' as Apifm;
 import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
-import './auth/index.dart';
+import './index/index.dart';
+import './config.dart';
 
 void main() => runApp(new StartPage());
 
@@ -33,13 +34,15 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState () {
     super.initState();
     // 初始化 apifm 插件
-    Apifm.init("gooking");
+    Apifm.init(apifmConfigSubDomain);
     // 读取启动图片数据
     banners();
   }
 
   banners () async {
-    var res = await Apifm.banners();
+    var res = await Apifm.banners({
+      'type': 'app'
+    });
     if (res['code'] == 0) {
       List<String> _imagesList = [];
       res['data'].forEach((pic) {

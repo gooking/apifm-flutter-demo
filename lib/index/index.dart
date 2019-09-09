@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'start_page.dart';
+
+import './banner.dart';
+import '../bottomNavigationBar.dart';
 
 void main() => runApp(new IndexPage());
 
@@ -7,14 +9,14 @@ class IndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter layout demo',
+      title: 'Index page',
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Flutter layout demo'),
+        body: Column(
+          children: <Widget>[
+            BannerWidget(),
+          ],
         ),
-        body: Center(
-          child: Text('this is main page!'),
-        ),
+        bottomNavigationBar: new FootWidget(),
       ),
     );
   }
