@@ -7,7 +7,7 @@ packages:
       name: apifm
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.6"
   async:
     dependency: transitive
     description:

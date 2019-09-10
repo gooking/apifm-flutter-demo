@@ -33,7 +33,7 @@ class _WidgetState extends State<FootWidget> {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          title: Text('Home'),
+          title: Text('首页'),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.business),

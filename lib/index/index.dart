@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import './banner.dart';
+import './category.dart';
+import './goods.dart';
 import '../bottomNavigationBar.dart';
 
 void main() => runApp(new IndexPage());
@@ -11,9 +13,26 @@ class IndexPage extends StatelessWidget {
     return MaterialApp(
       title: 'Index page',
       home: Scaffold(
-        body: Column(
-          children: <Widget>[
-            BannerWidget(),
+        body: new CustomScrollView(
+          shrinkWrap: true,
+          // 内容
+          slivers: <Widget>[
+            new SliverPadding(
+              padding: const EdgeInsets.all(0),
+              sliver: new SliverList(
+                delegate: new SliverChildListDelegate(
+                  <Widget>[
+                    BannerWidget(),
+                    CategoryWidget(),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      color: Colors.grey[300],
+                      child: GoodsWidget(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
         bottomNavigationBar: new FootWidget(),

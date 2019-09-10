@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:apifm/apifm.dart' as Apifm;
 import '../config.dart';
 import 'package:loading/loading.dart';
@@ -11,39 +10,52 @@ class CategoryWidget extends StatefulWidget {
 }
 
 class _WidgetState extends State<CategoryWidget> {
-  List<String> imagesList = [];
+  List<Widget> buildGridTileList = [];
 
   @override
-  void initState () {
+  void initState() {
     super.initState();
     // 初始化 apifm 插件
     Apifm.init(apifmConfigSubDomain);
     // 读取启动图片数据
-    banners();
+    category();
   }
 
-  banners () async {
-    var res = await Apifm.banners({
-      'type': 'new'
-    });
+  category() async {
+    var res = await Apifm.goodsCategory();
     if (res['code'] == 0) {
-      List<String> _imagesList = [];
-      res['data'].forEach((pic) {
-        _imagesList.add(pic['picUrl']);
+      List<Widget> _buildGridTileList = [];
+      res['data'].forEach((entity) {
+        _buildGridTileList.add(new Column(          
+          children: <Widget>[
+            Container(
+              width: 45,
+              height: 45,
+              child: Image.network(
+                entity['icon'],
+                fit: BoxFit.cover,
+              ),
+            ),
+            new Expanded(
+              child: Text(entity['name']),
+            ),
+          ],
+        ));
       });
+      print(_buildGridTileList);
       setState(() {
-        imagesList = _imagesList;
+        buildGridTileList = _buildGridTileList;
       });
     }
   }
 
-  bannerClick(index){
-    print(index); 
+  bannerClick(index) {
+    print(index);
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    if (imagesList.length == 0) {
+    if (buildGridTileList.length == 0) {
       return new Container(
         color: Colors.grey,
         child: Center(
@@ -52,20 +64,19 @@ class _WidgetState extends State<CategoryWidget> {
       );
     } else {
       return new Container(
-        height: 200,
-        color: Colors.grey,
-        child: new Swiper(
-          itemBuilder: (BuildContext context,int index){
-            return new Image.network(imagesList[index],fit: BoxFit.cover,);
-          },
-          itemCount: imagesList.length,
-          loop: true,
-          autoplay: true,
-          pagination: new SwiperPagination(),
-          onTap: bannerClick,
-        ),
-      );
+          width: 380,
+          height: 170,
+          margin: EdgeInsets.only(top: 20),
+          child: new GridView.count(
+            //横轴数量 这里的横轴就是x轴 因为方向是垂直的时候 主轴是垂直的
+            crossAxisCount: 5,
+            padding: const EdgeInsets.all(4.0),
+            //主轴间隔
+            mainAxisSpacing: 20.0,
+            //横轴间隔
+            crossAxisSpacing: 4.0,
+            children: buildGridTileList,
+          ));
     }
-    
   }
 }
