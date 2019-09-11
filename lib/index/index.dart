@@ -32,7 +32,7 @@ class IndexPage extends StatelessWidget {
                     ),
                     CategoryWidget(),
                     Container(
-                      padding: EdgeInsets.fromLTRB(3.0,8.0,3.0,8.0),
+                      padding: EdgeInsets.fromLTRB(2.0,8.0,2.0,8.0),
                       color: Colors.grey[300],
                       child: GoodsWidget(),
                     ),
