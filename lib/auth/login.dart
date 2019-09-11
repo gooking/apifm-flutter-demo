@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:apifm/apifm.dart' as Apifm;
+import '../config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import '../utils/AuthHandle.dart' as AuthHandle;
 import 'dart:io';
 import 'package:device_info/device_info.dart';
 
@@ -9,29 +10,12 @@ import 'reset_pwd.dart';
 
 void main() => runApp(LoginPage());
 
-// 这个 widget 作用这个应用的顶层 widget.
-//这个 widget 是无状态的，所以我们继承的是 [StatelessWidget].
-//对应的，有状态的 widget 可以继承 [StatefulWidget]
-class LoginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // 我们想使用 material 风格的应用，所以这里用 MaterialApp
-    return MaterialApp(
-      // 移动设备使用这个 title 来表示我们的应用。具体一点说，在 Android 设备里，我们点击
-      // recent 按钮打开最近应用列表的时候，显示的就是这个 title。
-      title: 'Welcome to Flutter',
-      // 应用的“主页”
-      home: _LoginPageWidget(),
-    );
-  }
-}
-
-class _LoginPageWidget extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
   _LoginPageWidgetState createState() => _LoginPageWidgetState();
 }
 
-class _LoginPageWidgetState extends State<_LoginPageWidget> {
+class _LoginPageWidgetState extends State<LoginPage> {
   //全局 Key 用来获取 Form 表单组件
   GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   String mobile;
@@ -41,7 +25,7 @@ class _LoginPageWidgetState extends State<_LoginPageWidget> {
 
   @override
   void initState() {
-    Apifm.init('gooking');
+    Apifm.init(apifmConfigSubDomain);
     super.initState();
   }
 
@@ -64,7 +48,7 @@ class _LoginPageWidgetState extends State<_LoginPageWidget> {
       Fluttertoast.showToast(msg: "请输入手机号码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
-    if (password == null || password.trim().length < 4) {
+    if (password == null) {
       Fluttertoast.showToast(msg: "请输入登录密码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
@@ -80,10 +64,11 @@ class _LoginPageWidgetState extends State<_LoginPageWidget> {
       deviceId = androidInfo.id;
       deviceName = androidInfo.display;
     }
-    print('deviceId: $deviceId, deviceName: $deviceName');
     var res = await Apifm.login_mobile(mobile, password, deviceId, deviceName);
     if (res['code'] == 0) {
+      await AuthHandle.login(res['data']['token'], res['data']['uid']);
       Fluttertoast.showToast(msg: "登录成功!", gravity: ToastGravity.CENTER, fontSize: 14);
+      Navigator.pop(context);
     } else {
       Fluttertoast.showToast(msg: res['msg'], gravity: ToastGravity.CENTER, fontSize: 14);
     }

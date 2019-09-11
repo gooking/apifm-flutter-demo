@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:apifm/apifm.dart' as Apifm;
+import '../config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'login.dart';
@@ -40,7 +41,7 @@ class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
 
   @override
   void initState() {
-    Apifm.init('gooking');
+    Apifm.init(apifmConfigSubDomain);
     changePicCode();
     super.initState();
   }
@@ -102,7 +103,7 @@ class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
       Fluttertoast.showToast(msg: "请输入短信验证码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
-    if (password == null || password.trim().length < 4) {
+    if (password == null) {
       Fluttertoast.showToast(msg: "请输入登录密码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }

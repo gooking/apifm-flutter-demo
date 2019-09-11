@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:apifm/apifm.dart' as Apifm;
-
+import '../config.dart';
 import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 
@@ -68,10 +68,9 @@ class _ImagePicState extends State<_ImagePic> {
   void initState() {
     super.initState();
     // 初始化 apifm 插件
-    Apifm.init("gooking");
+    Apifm.init(apifmConfigSubDomain);
     // 读取系统参数设置
     Apifm.queryConfigValue('AUTH_INDEX_PIC').then((res) {
-      print(res);
       if (res['code'] == 0) {
         setState(() {
           picUrl = res['data'];
@@ -124,7 +123,7 @@ class _Foot extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => RegisterPage()),
               );
             },
-            color: Colors.red,
+            color: Colors.grey,
             textColor: Colors.white,
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 60),
             child: const Text('没有账号, 我要注册', style: TextStyle(fontSize: 16)),

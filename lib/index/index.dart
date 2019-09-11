@@ -5,6 +5,8 @@ import './category.dart';
 import './goods.dart';
 import '../bottomNavigationBar.dart';
 
+import '../sign/btn.dart';
+
 void main() => runApp(new IndexPage());
 
 class IndexPage extends StatelessWidget {
@@ -22,7 +24,12 @@ class IndexPage extends StatelessWidget {
               sliver: new SliverList(
                 delegate: new SliverChildListDelegate(
                   <Widget>[
-                    BannerWidget(),
+                    Stack(
+                      children: <Widget>[
+                        BannerWidget(),
+                        new SignFloatBtnPage(),
+                      ],
+                    ),
                     CategoryWidget(),
                     Container(
                       padding: EdgeInsets.all(10),

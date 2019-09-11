@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:apifm/apifm.dart' as Apifm;
+import '../config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'login.dart';
@@ -40,7 +41,7 @@ class _ForgetPwdPageWidgetState extends State<_ForgetPwdPageWidget> {
 
   @override
   void initState() {
-    Apifm.init('gooking');
+    Apifm.init(apifmConfigSubDomain);
     changePicCode();
     super.initState();
   }
