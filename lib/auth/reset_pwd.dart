@@ -7,29 +7,12 @@ import 'login.dart';
 
 void main() => runApp(ForgetPwdPage());
 
-// 这个 widget 作用这个应用的顶层 widget.
-//这个 widget 是无状态的，所以我们继承的是 [StatelessWidget].
-//对应的，有状态的 widget 可以继承 [StatefulWidget]
-class ForgetPwdPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // 我们想使用 material 风格的应用，所以这里用 MaterialApp
-    return MaterialApp(
-      // 移动设备使用这个 title 来表示我们的应用。具体一点说，在 Android 设备里，我们点击
-      // recent 按钮打开最近应用列表的时候，显示的就是这个 title。
-      title: 'Welcome to Flutter',
-      // 应用的“主页”
-      home: _ForgetPwdPageWidget(),
-    );
-  }
-}
-
-class _ForgetPwdPageWidget extends StatefulWidget {
+class ForgetPwdPage extends StatefulWidget {
   @override
   _ForgetPwdPageWidgetState createState() => _ForgetPwdPageWidgetState();
 }
 
-class _ForgetPwdPageWidgetState extends State<_ForgetPwdPageWidget> {
+class _ForgetPwdPageWidgetState extends State<ForgetPwdPage> {
   //全局 Key 用来获取 Form 表单组件
   GlobalKey<FormState> loginKey = GlobalKey<FormState>();
   String mobile;

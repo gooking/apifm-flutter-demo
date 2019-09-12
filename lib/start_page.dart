@@ -6,28 +6,12 @@ import 'package:loading/indicator/ball_pulse_indicator.dart';
 import './index/index.dart';
 import './config.dart';
 
-void main() => runApp(new StartPage());
-
-class StartPage extends StatelessWidget {
+class StartPage extends StatefulWidget {  
   @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Apifm HelloWorld',
-      theme: new ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: new MyHomePage(),
-    );
-  }
+  _StartPageState createState() => new _StartPageState();
 }
 
-class MyHomePage extends StatefulWidget {
-  
-  @override
-  _MyHomePageState createState() => new _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class _StartPageState extends State<StartPage> {
   List<String> imagesList = [];
 
   @override
@@ -76,9 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
           pagination: new SwiperPagination(),
           onTap: (index) {
             print(index); // 可以根据是否是最后一张图片，来跳转至主界面，一般会在最后一张图片上面设置一个按钮元素，引导用户去点击
-            Navigator.pushReplacement(
+            Navigator.pushReplacementNamed(
               context,
-              MaterialPageRoute(builder: (context) => IndexPage()),
+              "/index",
             );
           },
         ),

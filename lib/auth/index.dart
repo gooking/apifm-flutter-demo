@@ -13,21 +13,17 @@ void main() => runApp(new AuthIndexPage());
 class AuthIndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Auth Index Page',
-      color: Colors.white,
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
-          children: <Widget>[
-            SizedBox(height: 120),
-            _Logo(),
-            Expanded(
-              child: _Image(),
-            ),
-            _Foot(),
-          ],
-        ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        children: <Widget>[
+          SizedBox(height: 120),
+          _Logo(),
+          Expanded(
+            child: _Image(),
+          ),
+          _Foot(),
+        ],
       ),
     );
   }
