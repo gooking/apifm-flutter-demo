@@ -103,11 +103,11 @@ class _RegisterPageWidgetState extends State<_RegisterPageWidget> {
       Fluttertoast.showToast(msg: "请输入短信验证码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
-    if (password == null) {
+    if (password == null || smsCode.trim().length < 1) {
       Fluttertoast.showToast(msg: "请输入登录密码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
-    var res = await Apifm.register_mobile({
+    var res = await Apifm.registerMobile({
       'mobile': mobile,
       'pwd': password,
       'code': smsCode

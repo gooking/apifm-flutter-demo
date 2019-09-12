@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import '../utils/AuthHandle.dart' as AuthHandle;
 import 'dart:io';
 import 'package:device_info/device_info.dart';
+import 'package:flutter_qq/flutter_qq.dart';
 
 import 'reset_pwd.dart';
 
@@ -36,6 +37,13 @@ class _LoginPageWidgetState extends State<LoginPage> {
     );
   }
 
+  void processLoginSuccess (token, uid) async {
+    // 登录成功后处理
+    await AuthHandle.login(token, uid);
+    Fluttertoast.showToast(msg: "登录成功!", gravity: ToastGravity.CENTER, fontSize: 14);
+    Navigator.pop(context);
+  }
+
   void login() async {
     var loginForm = loginKey.currentState;
     //验证 Form表单
@@ -64,13 +72,44 @@ class _LoginPageWidgetState extends State<LoginPage> {
       deviceId = androidInfo.id;
       deviceName = androidInfo.display;
     }
-    var res = await Apifm.login_mobile(mobile, password, deviceId, deviceName);
+    var res = await Apifm.loginMobile(mobile, password, deviceId, deviceName);
     if (res['code'] == 0) {
-      await AuthHandle.login(res['data']['token'], res['data']['uid']);
-      Fluttertoast.showToast(msg: "登录成功!", gravity: ToastGravity.CENTER, fontSize: 14);
-      Navigator.pop(context);
+      processLoginSuccess (res['data']['token'], res['data']['uid']);
     } else {
       Fluttertoast.showToast(msg: res['msg'], gravity: ToastGravity.CENTER, fontSize: 14);
+    }
+  }
+
+  loginQQ () async {
+    const appid = '1105644913';
+    await FlutterQq.registerQQ(appid);
+    var qqResult = await FlutterQq.login();    
+    if (qqResult.code == 0) {
+      // 登录成功
+      Fluttertoast.showToast(msg: '授权成功', gravity: ToastGravity.CENTER, fontSize: 14);
+      var res = await Apifm.loginQQConnect(appid, qqResult.response['openid'], qqResult.response['accessToken']);
+      if (res['code'] == 10000) {
+        // 用户不存在，则先注册
+        await Apifm.registerQQConnect({
+          'oauthConsumerKey': appid,
+          'openid': qqResult.response['openid'],
+          'accessToken': qqResult.response['accessToken'],
+        });
+        // 注册完后重新登录
+        res = await Apifm.loginQQConnect(appid, qqResult.response['openid'], qqResult.response['accessToken']);
+      }
+      if (res['code'] != 0) {
+        // 登录失败
+        Fluttertoast.showToast(msg: res['msg'], gravity: ToastGravity.CENTER, fontSize: 14);
+        return;
+      }
+      processLoginSuccess (res['data']['token'], res['data']['uid']); // 登录成功后的业务处理
+    } else if (qqResult.code == 1) {
+      // 授权失败
+      Fluttertoast.showToast(msg: qqResult.message, gravity: ToastGravity.CENTER, fontSize: 14);
+    } else {
+      // 用户取消授权
+      Fluttertoast.showToast(msg: '已取消', gravity: ToastGravity.CENTER, fontSize: 14);
     }
   }
 
@@ -99,7 +138,7 @@ class _LoginPageWidgetState extends State<LoginPage> {
                       hintStyle: TextStyle(
                         color: Colors.grey,
                         fontSize: 13,
-                      ),
+                      ),                      
                       prefixIcon: Icon(Icons.person),
                     ),
                     //当 Form 表单调用保存方法 Save时回调的函数。
@@ -153,7 +192,24 @@ class _LoginPageWidgetState extends State<LoginPage> {
                 ),
               ],
             ),
-          )
+          ),
+          Container(
+            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  child: 
+                  new MaterialButton(                    
+                      padding: EdgeInsets.all(15),
+                      color: Colors.red[400],
+                      textColor: Colors.white,
+                      child: new Text('QQ一键登录'),
+                      onPressed: loginQQ,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );

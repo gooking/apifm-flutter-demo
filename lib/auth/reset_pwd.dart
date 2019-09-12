@@ -107,7 +107,7 @@ class _ForgetPwdPageWidgetState extends State<_ForgetPwdPageWidget> {
       Fluttertoast.showToast(msg: "请输入登录密码", gravity: ToastGravity.CENTER, fontSize: 14);
       return;
     }
-    var res = await Apifm.resetPwd(mobile, password, smsCode);
+    var res = await Apifm.resetPwdUseMobileCode(mobile, password, smsCode);
     if (res['code'] == 0) {
       Fluttertoast.showToast(msg: "注册成功,请登录", gravity: ToastGravity.CENTER, fontSize: 14);
       Navigator.push(
