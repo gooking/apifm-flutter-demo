@@ -4,10 +4,10 @@ QQ交流群: 577126347
 
 # 效果截图
 
-<img width="400px" src="https://dcdn.it120.cc/2019/09/10/bcb3dd04-fbc4-4fb9-a8f7-bdcdc9a102a3.png"/>
-<img width="400px" src="https://dcdn.it120.cc/2019/09/10/0bfdfd77-06c4-4fb1-8346-8a42b95fa730.png"/>
-<img width="400px" src="https://dcdn.it120.cc/2019/09/10/c51dd7f8-d133-4492-b01a-a0303cba9650.png"/>
-<img width="400px" src="https://dcdn.it120.cc/2019/09/13/b81dbc8a-5f8c-4ace-b152-2b12af85b1a6.png"/>
+<img width="300px" src="https://dcdn.it120.cc/2019/09/10/bcb3dd04-fbc4-4fb9-a8f7-bdcdc9a102a3.png"/>
+<img width="300px" src="https://dcdn.it120.cc/2019/09/10/0bfdfd77-06c4-4fb1-8346-8a42b95fa730.png"/>
+<img width="300px" src="https://dcdn.it120.cc/2019/09/10/c51dd7f8-d133-4492-b01a-a0303cba9650.png"/>
+<img width="300px" src="https://dcdn.it120.cc/2019/09/13/b81dbc8a-5f8c-4ace-b152-2b12af85b1a6.png"/>
 
 # 相关资源
 
