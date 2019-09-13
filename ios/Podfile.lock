@@ -7,6 +7,8 @@ PODS:
     - QQSDK
   - fluttertoast (0.0.2):
     - Flutter
+  - fluwx (0.0.1):
+    - Flutter
   - QQSDK (3.3.3)
   - shared_preferences (0.0.1):
     - Flutter
@@ -16,6 +18,7 @@ DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
   - flutter_qq (from `.symlinks/plugins/flutter_qq/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
+  - fluwx (from `.symlinks/plugins/fluwx/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
 
 SPEC REPOS:
@@ -31,6 +34,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_qq/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
+  fluwx:
+    :path: ".symlinks/plugins/fluwx/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
 
@@ -39,6 +44,7 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_qq: fd560988a312c5c7c077f1f93980badf1de09eed
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
+  fluwx: 19524c5e4c9c539a646407259139c9c1e4eaf9e5
   QQSDK: 97a38fdbd3217626f0ef16321b67c4eb67e7bf9d
   shared_preferences: 1feebfa37bb57264736e16865e7ffae7fc99b523
 

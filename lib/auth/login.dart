@@ -6,6 +6,7 @@ import '../utils/AuthHandle.dart' as AuthHandle;
 import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:flutter_qq/flutter_qq.dart';
+import 'package:fluwx/fluwx.dart' as fluwx;
 
 import 'reset_pwd.dart';
 
@@ -113,6 +114,75 @@ class _LoginPageWidgetState extends State<LoginPage> {
     }
   }
 
+  loginWX () async {
+    const appid = 'wx4f32d9265f9cf669';
+    await fluwx.register(appId: appid);
+    fluwx.sendAuth(scope: "snsapi_userinfo", state: "login");
+    fluwx.responseFromAuth.listen((data) {
+      if (data.state == 'login') {
+        wxCallBackLogin(data);
+      }
+      if (data.state == 'register') {
+        wxCallBackRegister(data);
+      }
+    });
+  }
+
+  wxCallBackLogin (fluwx.WeChatAuthResponse res) async {
+    String code = res.code; // 用户换取access_token的code，仅在ErrCode为0时有效    
+    if (res.errCode == 0) {
+      // 同意授权  
+      Fluttertoast.showToast(msg: '授权成功', gravity: ToastGravity.CENTER, fontSize: 14);
+      var res = await Apifm.loginWX(code);
+      if (res['code'] == 10000) {
+        // 用户不存在，则先注册
+       fluwx.sendAuth(scope: "snsapi_userinfo", state: "register");
+       return;
+      }
+      if (res['code'] != 0) {
+        // 登录失败
+        Fluttertoast.showToast(msg: res['msg'], gravity: ToastGravity.CENTER, fontSize: 14);
+        return;
+      }
+      processLoginSuccess (res['data']['token'], res['data']['uid']); // 登录成功后的业务处理
+    } else if (res.errCode == -4) {
+      // 用户拒绝授权
+      Fluttertoast.showToast(msg: '拒绝授权', gravity: ToastGravity.CENTER, fontSize: 14);
+    } else if (res.errCode == -2) {
+      // 用户取消
+      Fluttertoast.showToast(msg: '已取消', gravity: ToastGravity.CENTER, fontSize: 14);
+    } else {
+      // 其他错误
+      Fluttertoast.showToast(msg: res.errCode.toString(), gravity: ToastGravity.CENTER, fontSize: 14);
+    }
+  }
+
+  wxCallBackRegister (fluwx.WeChatAuthResponse res) async {
+    String code = res.code; // 用户换取access_token的code，仅在ErrCode为0时有效    
+    if (res.errCode == 0) {
+      // 同意授权     
+      Fluttertoast.showToast(msg: '授权成功', gravity: ToastGravity.CENTER, fontSize: 14);
+      var res = await Apifm.registerWX({
+        'code': code,
+      });
+      if (res['code'] != 0) {
+        // 注册失败
+        Fluttertoast.showToast(msg: res['msg'], gravity: ToastGravity.CENTER, fontSize: 14);
+        return;
+      }
+      fluwx.sendAuth(scope: "snsapi_userinfo", state: "login");
+    } else if (res.errCode == -4) {
+      // 用户拒绝授权
+      Fluttertoast.showToast(msg: '拒绝授权', gravity: ToastGravity.CENTER, fontSize: 14);
+    } else if (res.errCode == -2) {
+      // 用户取消
+      Fluttertoast.showToast(msg: '已取消', gravity: ToastGravity.CENTER, fontSize: 14);
+    } else {
+      // 其他错误
+      Fluttertoast.showToast(msg: res.errCode.toString(), gravity: ToastGravity.CENTER, fontSize: 14);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -164,22 +234,22 @@ class _LoginPageWidgetState extends State<LoginPage> {
                       password = value;
                     },
                   ),
-                  new Align(
-                    alignment: FractionalOffset.centerRight,
-                    child: new FlatButton(                      
-                      padding: EdgeInsets.all(0),
-                      child: new Text('忘记登录密码？'),
-                      onPressed: forgetPassword,
-                    )
-                  ),                  
                 ],
               ),
             ),
           ),
+          new Align(
+            alignment: FractionalOffset.centerRight,
+            child: new FlatButton(
+              padding: EdgeInsets.only(right: 15),
+              child: new Text('忘记登录密码？'),
+              onPressed: forgetPassword,
+            )
+          ),
           Container(
-            padding: EdgeInsets.all(15),
             child: Row(
               children: <Widget>[
+                SizedBox(width: 15,),
                 Expanded(
                   child: 
                   new MaterialButton(                    
@@ -190,25 +260,21 @@ class _LoginPageWidgetState extends State<LoginPage> {
                       onPressed: login,
                   ),
                 ),
+                SizedBox(width: 15,),
               ],
             ),
           ),
-          Container(
-            padding: EdgeInsets.fromLTRB(15, 0, 15, 0),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: 
-                  new MaterialButton(                    
-                      padding: EdgeInsets.all(15),
-                      color: Colors.red[400],
-                      textColor: Colors.white,
-                      child: new Text('QQ一键登录'),
-                      onPressed: loginQQ,
-                  ),
-                ),
-              ],
-            ),
+          ButtonBar(
+            children: <Widget>[
+              new MaterialButton(
+                child: new Text('QQ登录'),
+                onPressed: loginQQ,
+              ),
+              new MaterialButton(
+                child: new Text('微信登录'),
+                onPressed: loginWX,
+              ),
+            ],
           ),
         ],
       ),
