@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import '../utils/AuthHandle.dart' as AuthHandle;
-import '../auth/index.dart';
-import 'index.dart';
 
 class SignFloatBtnPage extends StatelessWidget {
   @override
@@ -9,15 +7,9 @@ class SignFloatBtnPage extends StatelessWidget {
     _click() async {
       bool _isLogined = await AuthHandle.checkLogined();
       if (_isLogined) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => SignIndex()),
-        );
+        Navigator.pushNamed(context, '/score/index');
       } else {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => AuthIndexPage()),
-        );
+        Navigator.pushNamed(context, '/login');
       }
     }
 
@@ -44,7 +36,7 @@ class SignFloatBtnPage extends StatelessWidget {
                     width: 2,
                   ),
                   Icon(
-                    Icons.business,
+                    Icons.format_list_bulleted,
                     size: 20,
                     color: Color(0xFFcea044),
                   ),
@@ -52,8 +44,8 @@ class SignFloatBtnPage extends StatelessWidget {
                     width: 3,
                   ),
                   Text(
-                    '签到',
-                    style: TextStyle(fontSize: 14, color: Color(0xFF353535)),
+                    '明细',
+                    style: TextStyle(fontSize: 14, color: Color(0xFFcea044)),
                   )
                 ],
               ),

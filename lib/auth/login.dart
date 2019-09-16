@@ -32,10 +32,7 @@ class _LoginPageWidgetState extends State<LoginPage> {
   }
 
   forgetPassword () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => ForgetPwdPage()),
-    );
+    Navigator.pushNamed(context, '/forget-pwd');
   }
 
   void processLoginSuccess (token, uid) async {

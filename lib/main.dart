@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/sign/index.dart';
 import 'start_page.dart';
 import 'config.dart';
 import 'routes.dart';
@@ -14,7 +15,7 @@ class Main extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new StartPage(),
+      home: new SignIndex(), //SignIndex StartPage
     );
   }
 }

@@ -101,10 +101,7 @@ class _Foot extends StatelessWidget {
           SizedBox(height: 30),
           RaisedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => LoginPage()),
-              );
+              Navigator.pushNamed(context, '/login');
             },
             color: Colors.red,
             textColor: Colors.white,
@@ -114,10 +111,7 @@ class _Foot extends StatelessWidget {
           SizedBox(height: 20),
           RaisedButton(
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => RegisterPage()),
-              );
+              Navigator.pushNamed(context, '/reg');
             },
             color: Colors.grey,
             textColor: Colors.white,

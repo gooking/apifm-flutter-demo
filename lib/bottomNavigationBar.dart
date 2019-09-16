@@ -20,10 +20,7 @@ class _WidgetState extends State<FootWidget> {
       _selectedIndex = index;
     });
     if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => AuthIndexPage()),
-      );
+      Navigator.pushNamed(context, '/auth');
     }
   }
 

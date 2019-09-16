@@ -6,12 +6,19 @@ import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 
 class BannerWidget extends StatefulWidget {
+  final double height;
+  final String type;
+  BannerWidget(this.height, this.type);
   @override
-  _WidgetState createState() => new _WidgetState();
+  _WidgetState createState() => new _WidgetState(height, type);
 }
 
 class _WidgetState extends State<BannerWidget> {
   List<String> imagesList = [];
+  final double height;
+  final String type;
+
+  _WidgetState(this.height, this.type);
 
   @override
   void initState () {
@@ -24,7 +31,7 @@ class _WidgetState extends State<BannerWidget> {
 
   banners () async {
     var res = await Apifm.banners({
-      'type': 'new'
+      'type': type
     });
     if (res['code'] == 0) {
       List<String> _imagesList = [];
@@ -52,7 +59,7 @@ class _WidgetState extends State<BannerWidget> {
       );
     } else {
       return new Container(
-        height: 200,
+        height: height,
         color: Colors.grey,
         child: new Swiper(
           itemBuilder: (BuildContext context,int index){

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/component/banner.dart';
 
-import './banner.dart';
 import './category.dart';
 import './goods.dart';
 import '../bottomNavigationBar.dart';
 
-import '../sign/btn.dart';
+import '../sign/sign_btn.dart';
 
 void main() => runApp(new IndexPage());
 
@@ -24,7 +24,7 @@ class IndexPage extends StatelessWidget {
                 <Widget>[
                   Stack(
                     children: <Widget>[
-                      BannerWidget(),
+                      BannerWidget(200, 'new'),
                       new SignFloatBtnPage(),
                     ],
                   ),
