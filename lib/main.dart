@@ -1,10 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/sign/index.dart';
+import 'package:myapp/store/store.dart';
+import 'package:provider/provider.dart';
 import 'start_page.dart';
 import 'config.dart';
 import 'routes.dart';
 
-void main() => runApp(new Main());
+void main() {
+  runApp(
+    Provider<int>.value(
+      value: 48,
+      child: ChangeNotifierProvider.value(
+        value: ApplicationData(),
+        child: Main(),
+      ),
+    ),
+  );
+}
 
 class Main extends StatelessWidget {
   @override
@@ -15,7 +27,7 @@ class Main extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new SignIndex(), //SignIndex StartPage
+      home: new StartPage(), //SignIndex StartPage
     );
   }
 }

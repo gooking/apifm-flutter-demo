@@ -3,10 +3,6 @@ import 'package:apifm/apifm.dart' as Apifm;
 import '../config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'login.dart';
-
-void main() => runApp(RegisterPage());
-
 class RegisterPage extends StatefulWidget {
   @override
   _RegisterPageWidgetState createState() => _RegisterPageWidgetState();

@@ -14,7 +14,7 @@ class SignFloatBtnPage extends StatelessWidget {
     }
 
     return new Positioned(
-      bottom: 30,
+      bottom: 80,
       right: 0,
       child: new ButtonTheme(
         minWidth: 0,

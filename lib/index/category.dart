@@ -42,7 +42,6 @@ class _WidgetState extends State<CategoryWidget> {
           ],
         ));
       });
-      print(_buildGridTileList);
       setState(() {
         buildGridTileList = _buildGridTileList;
       });

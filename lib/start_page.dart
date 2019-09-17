@@ -3,7 +3,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:apifm/apifm.dart' as Apifm;
 import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
-import './index/index.dart';
 import './config.dart';
 
 class StartPage extends StatefulWidget {  

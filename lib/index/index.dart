@@ -7,8 +7,6 @@ import '../bottomNavigationBar.dart';
 
 import '../sign/sign_btn.dart';
 
-void main() => runApp(new IndexPage());
-
 class IndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

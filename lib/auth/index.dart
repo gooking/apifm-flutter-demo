@@ -5,11 +5,6 @@ import '../config.dart';
 import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 
-import 'register.dart';
-import 'login.dart';
-
-void main() => runApp(new AuthIndexPage());
-
 class AuthIndexPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

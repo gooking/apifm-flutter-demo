@@ -5,11 +5,18 @@ import 'package:shared_preferences/shared_preferences.dart';
 const String _TOKEN = "token";
 const String _UID = "uid";
 
+// 获取当前登录的 token
+getLoginedToken () async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  print('token: ' + prefs.getString(_TOKEN));
+  print('uid: ' + prefs.getInt(_UID).toString());
+  return prefs.getString(_TOKEN);
+}
+
 // 检测当前用户是否处于登录状态
 checkLogined() async {
   Apifm.init(apifmConfigSubDomain);
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String token = prefs.getString(_TOKEN);
+  String token = await getLoginedToken();
   if (token == null) {
     return false;
   }

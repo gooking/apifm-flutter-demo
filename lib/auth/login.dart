@@ -8,10 +8,6 @@ import 'package:device_info/device_info.dart';
 import 'package:flutter_qq/flutter_qq.dart';
 import 'package:fluwx/fluwx.dart' as fluwx;
 
-import 'reset_pwd.dart';
-
-void main() => runApp(LoginPage());
-
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageWidgetState createState() => _LoginPageWidgetState();

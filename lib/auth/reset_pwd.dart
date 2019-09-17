@@ -3,10 +3,6 @@ import 'package:apifm/apifm.dart' as Apifm;
 import '../config.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'login.dart';
-
-void main() => runApp(ForgetPwdPage());
-
 class ForgetPwdPage extends StatefulWidget {
   @override
   _ForgetPwdPageWidgetState createState() => _ForgetPwdPageWidgetState();
