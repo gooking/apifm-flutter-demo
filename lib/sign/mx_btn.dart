@@ -7,7 +7,7 @@ class SignFloatBtnPage extends StatelessWidget {
     _click() async {
       bool _isLogined = await AuthHandle.checkLogined();
       if (_isLogined) {
-        Navigator.pushNamed(context, '/score/index');
+        Navigator.pushNamed(context, '/logs');
       } else {
         Navigator.pushNamed(context, '/login');
       }
