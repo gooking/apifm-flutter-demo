@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/sign/index.dart';
+import './sign/index.dart';
+import './sign/logs.dart';
 
 import 'auth/index.dart';
 import 'auth/login.dart';
@@ -17,5 +18,6 @@ Map<String, WidgetBuilder> initAppRoutes() {
     '/forget-pwd': (context) => ForgetPwdPage(),
     '/score/index': (context) => SignIndex(),
     '/goods/detail': (context) => GoodsDetailPage(),
+    '/logs': (context) => Logs(),
   };
 }
