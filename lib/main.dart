@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/sign/index.dart';
-import 'package:myapp/store/store.dart';
+import 'store/store.dart';
 import 'package:provider/provider.dart';
 import 'start_page.dart';
 import 'config.dart';
@@ -27,7 +26,7 @@ class Main extends StatelessWidget {
       theme: new ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: new StartPage(), //SignIndex StartPage
+      home: new StartPage(), //GoodsDetailPage StartPage
     );
   }
 }

@@ -22,7 +22,7 @@ class IndexPage extends StatelessWidget {
                 <Widget>[
                   Stack(
                     children: <Widget>[
-                      BannerWidget(200, 'new'),
+                      BannerWidget(height:200, type:'new'),
                       new SignFloatBtnPage(),
                     ],
                   ),

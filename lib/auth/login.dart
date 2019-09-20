@@ -23,8 +23,8 @@ class _LoginPageWidgetState extends State<LoginPage> {
 
   @override
   void initState() {
-    Apifm.init(apifmConfigSubDomain);
     super.initState();
+    Apifm.init(apifmConfigSubDomain);
   }
 
   forgetPassword () {

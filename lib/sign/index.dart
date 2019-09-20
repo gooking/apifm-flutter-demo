@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:myapp/component/banner.dart';
 import 'package:apifm/apifm.dart' as Apifm;
 import 'package:myapp/store/store.dart';
-import 'package:myapp/utils/apis.dart';
+import '../utils/apis.dart';
 import 'package:provider/provider.dart';
 import '../config.dart';
 import 'mx_btn.dart';
@@ -39,7 +39,7 @@ class _Colums extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        new BannerWidget(90, 'score'),
+        new BannerWidget(height:90, type:'score'),
       ],
     );
   }
@@ -143,11 +143,11 @@ class _Useless extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                '超级会员',
+                '积分商城',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               Text(
-                '购物享双倍积分',
+                '小积分大用处',
                 style: TextStyle(fontSize: 12),
               ),
             ],
@@ -165,11 +165,11 @@ class _Useless extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                '超级会员',
+                '积分抽奖',
                 style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               Text(
-                '购物享双倍积分',
+                '100%中奖',
                 style: TextStyle(fontSize: 12),
               ),
             ],

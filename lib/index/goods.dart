@@ -82,7 +82,12 @@ class _WidgetState extends State<GoodsWidget> {
             ],
           ),
         );
-        _buildGridTileList.add(goodsW);
+        _buildGridTileList.add(GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, '/goods/detail');
+          },
+          child: goodsW,
+        ));
       });
       setState(() {
         buildGridTileList = _buildGridTileList;

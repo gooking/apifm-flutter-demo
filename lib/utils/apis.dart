@@ -14,5 +14,5 @@ class ApiUtils {
       return res['data'];
     }
     return null;
-  }
+  }  
 }

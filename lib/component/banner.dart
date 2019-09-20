@@ -6,11 +6,16 @@ import 'package:loading/loading.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 
 class BannerWidget extends StatefulWidget {
+  final List<String> imagesList;
   final double height;
   final String type;
-  BannerWidget(this.height, this.type);
+  BannerWidget({@required this.height, this.type='', this.imagesList});
   @override
-  _WidgetState createState() => new _WidgetState(height, type);
+  _WidgetState createState() => new _WidgetState(
+    height: height,
+    type: type,
+    imagesList: imagesList,
+  );
 }
 
 class _WidgetState extends State<BannerWidget> {
@@ -18,15 +23,17 @@ class _WidgetState extends State<BannerWidget> {
   final double height;
   final String type;
 
-  _WidgetState(this.height, this.type);
+  _WidgetState({this.height, this.type, this.imagesList});
 
   @override
   void initState () {
     super.initState();
-    // 初始化 apifm 插件
-    Apifm.init(apifmConfigSubDomain);
-    // 读取启动图片数据
-    banners();
+    if (imagesList == null || imagesList.length == 0) {
+      // 初始化 apifm 插件
+      Apifm.init(apifmConfigSubDomain);
+      // 读取启动图片数据
+      banners();
+    }
   }
 
   banners () async {

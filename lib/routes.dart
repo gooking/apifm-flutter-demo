@@ -5,6 +5,7 @@ import 'auth/index.dart';
 import 'auth/login.dart';
 import 'auth/register.dart';
 import 'auth/reset_pwd.dart';
+import 'goods/index.dart';
 import 'index/index.dart';
 
 Map<String, WidgetBuilder> initAppRoutes() {
@@ -15,5 +16,6 @@ Map<String, WidgetBuilder> initAppRoutes() {
     '/reg': (context) => RegisterPage(),
     '/forget-pwd': (context) => ForgetPwdPage(),
     '/score/index': (context) => SignIndex(),
+    '/goods/detail': (context) => GoodsDetailPage(),
   };
 }
